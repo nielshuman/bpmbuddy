@@ -1,6 +1,6 @@
 'use strict';
 
-let particleCount = 700;
+let particleCount = 0;
 let particlePropCount = 9;
 let particlePropsLength = particleCount * particlePropCount;
 const rangeY = 100;
