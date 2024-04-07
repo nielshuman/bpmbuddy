@@ -76,28 +76,39 @@ function showGraph(data) {
     //     }
     // });
 
-
     // make a chart of the bpm vs time
     new Chart(graph, {
-        type: 'line',
-        data: {
-            labels: data.map((d, i) => i),
-            datasets: [{
+       type: 'scatter',
+         data: {
+              datasets: [{
                 label: 'BPM',
-                data: data.map(d => d.bpm),
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
-            responsive: true,
-            maintainAspectRatio: false
-        }
+                data: data.map(d => {
+                    return {x: d.time, y: d.bpm};
+                }),
+                showLine: true,
+                // borderColor: 'rgba(255, 99, 132, 1)',
+                // borderWidth: 1,
+                // pointRadius: 0
+              }]
+         },
+            options: {
+                scales: {
+                    x: {
+                        type: 'linear',
+                        // format the time as seconds
+                        ticks: {
+                            callback: function(value, index, values) {
+                                return (value / 1000).toFixed(1) + 's';
+                            }}
+                    },
+                    y: {
+                        beginAtZero: true
+
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            }
     });
 }
 
